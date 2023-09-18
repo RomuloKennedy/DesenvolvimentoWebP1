@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "rsa",
+      "type": "com.desenvolvimento.web.projeto1.config.RsaKeyProperties",
+      "sourceType": "com.desenvolvimento.web.projeto1.config.RsaKeyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "rsa.private-key",
+      "type": "java.security.interfaces.RSAPrivateKey",
+      "sourceType": "com.desenvolvimento.web.projeto1.config.RsaKeyProperties"
+    },
+    {
+      "name": "rsa.public-key",
+      "type": "java.security.interfaces.RSAPublicKey",
+      "sourceType": "com.desenvolvimento.web.projeto1.config.RsaKeyProperties"
+    }
+  ],
+  "hints": []
+}
