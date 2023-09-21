@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 @Getter
 public class UsuarioDTO {
     String nome;
+
     public UsuarioDTO(Usuario user){
         this.nome = user.getNome();
     }

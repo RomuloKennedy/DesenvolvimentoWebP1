@@ -36,7 +36,7 @@ public class WebSecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
             "/token",
-            "/home"
+            "/credenciais"
     };
 
     public WebSecurityConfig(RsaKeyProperties rsaKeys) {
@@ -47,11 +47,12 @@ public class WebSecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests( auth -> {
+                    auth.requestMatchers(AUTH_WHITELIST).permitAll();
                     auth.anyRequest().authenticated();
                 })
                 .oauth2ResourceServer( oauth -> oauth.jwt(Customizer.withDefaults()))
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(Customizer.withDefaults());
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                //.httpBasic(Customizer.withDefaults());
         return http.build();
     }
     @Bean
@@ -61,6 +62,8 @@ public class WebSecurityConfig {
         authProvider.setPasswordEncoder(encoder);
         return new ProviderManager(authProvider);
     }
+
+    /*
     @Bean
     public UserDetailsService users() {
 
@@ -71,6 +74,7 @@ public class WebSecurityConfig {
                 .build()
         );
     }
+    */
     @Bean
     JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(rsaKeys.publicKey()).build();

@@ -15,17 +15,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final TokenService service;
+    private final AuthenticationManager authenticationManager;
 
 
-    public AuthController(TokenService service) {
+    public AuthController(TokenService service, AuthenticationManager authenticationManager) {
         this.service = service;
-
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/token")
-    public String getToken(Authentication authentication){
+    public String getToken(@RequestBody LoginDTO loginDTO){
 
-        System.out.println("Controller");
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginDTO.username(),loginDTO.password()));
 
         String token = service.generateToken(authentication);
         return token;
