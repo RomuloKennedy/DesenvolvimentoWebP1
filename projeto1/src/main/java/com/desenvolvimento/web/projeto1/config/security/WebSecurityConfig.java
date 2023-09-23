@@ -52,7 +52,6 @@ public class WebSecurityConfig {
                 })
                 .oauth2ResourceServer( oauth -> oauth.jwt(Customizer.withDefaults()))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-                //.httpBasic(Customizer.withDefaults());
         return http.build();
     }
     @Bean
@@ -63,18 +62,6 @@ public class WebSecurityConfig {
         return new ProviderManager(authProvider);
     }
 
-    /*
-    @Bean
-    public UserDetailsService users() {
-
-        return new InMemoryUserDetailsManager(User
-                .withUsername("romulo")
-                .password(encoder().encode("password"))
-                .authorities("read")
-                .build()
-        );
-    }
-    */
     @Bean
     JwtDecoder jwtDecoder() {
         return NimbusJwtDecoder.withPublicKey(rsaKeys.publicKey()).build();
@@ -89,6 +76,5 @@ public class WebSecurityConfig {
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
-
 
 }

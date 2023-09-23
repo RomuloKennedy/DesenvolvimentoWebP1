@@ -35,7 +35,7 @@ public class Credenciais implements UserDetails {
     @OneToOne
     @MapsId
     @JoinColumn(name = "usuario_id")
-    Usuario usuario;
+    PessoaFisica pessoaFisica;
 
     @Column(unique = true)
     String username;
@@ -52,16 +52,6 @@ public class Credenciais implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Arrays.stream(role.split(",")).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
-    }
-
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
     }
 
     @Override

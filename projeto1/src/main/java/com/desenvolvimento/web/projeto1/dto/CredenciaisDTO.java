@@ -8,4 +8,7 @@ public class CredenciaisDTO {
     String password;
     String role;
     String nome;
+    String sobrenome;
+    String endereco;
+    String cpf;
 }
